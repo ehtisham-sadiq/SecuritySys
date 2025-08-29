@@ -33,7 +33,7 @@ class UserInfo(UserBase):
     client_id: Optional[int] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Employee schemas
 class EmployeeBase(BaseModel):
@@ -75,14 +75,14 @@ class Employee(EmployeeBase):
     updated_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class EmployeeDetail(Employee):
     documents: List["Document"] = []
     certifications: List["Certification"] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Document schemas
 class DocumentBase(BaseModel):
@@ -103,7 +103,16 @@ class Document(DocumentBase):
     updated_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+# Document response schema for API responses
+class DocumentResponse(Document):
+    pass
+
+# Document status update schema
+class DocumentStatusUpdate(BaseModel):
+    status: str
+    notes: Optional[str] = None
 
 # Certification schemas
 class CertificationBase(BaseModel):
@@ -123,7 +132,7 @@ class Certification(CertificationBase):
     updated_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Client schemas
 class ClientBase(BaseModel):
@@ -145,13 +154,13 @@ class Client(ClientBase):
     updated_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ClientDetail(Client):
     sites: List["Site"] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Site schemas
 class SiteBase(BaseModel):
@@ -172,7 +181,7 @@ class Site(SiteBase):
     updated_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Shift schemas
 class ShiftBase(BaseModel):
@@ -197,7 +206,7 @@ class Shift(ShiftBase):
     updated_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ShiftDetail(Shift):
     client: Client
@@ -206,7 +215,7 @@ class ShiftDetail(Shift):
     incidents: List["Incident"] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Incident schemas
 class IncidentBase(BaseModel):
@@ -228,7 +237,7 @@ class Incident(IncidentBase):
     updated_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Notification schemas
 class NotificationBase(BaseModel):
@@ -247,7 +256,7 @@ class Notification(NotificationBase):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Update forward references
 EmployeeDetail.update_forward_refs()
