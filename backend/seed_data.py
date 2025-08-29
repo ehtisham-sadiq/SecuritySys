@@ -15,7 +15,7 @@ from backend.database import Base
 from backend.models import User, Employee, Document, Certification, Client, Site, Shift, Incident, Notification, shift_employee
 
 # Get database URL from environment variable
-DATABASE_URL = os.environ.get("DATABASE_URL")
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///./security_system.db")
 
 # Create engine and session
 engine = create_engine(DATABASE_URL)

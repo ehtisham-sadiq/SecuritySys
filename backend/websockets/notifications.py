@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import Dict, List, Any
 import json
 import asyncio
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from backend.database import get_db
 from backend.auth import decode_token
@@ -56,7 +56,7 @@ class NotificationManager:
                 # Check for new notifications for each connected user
                 for user_id in self.active_connections:
                     # Get unread notifications created in the last minute
-                    one_minute_ago = datetime.now().timestamp() - 60
+                    one_minute_ago = datetime.now() - timedelta(minutes=1)
                     new_notifications = db.query(Notification).filter(
                         Notification.user_id == user_id,
                         Notification.is_read == False,

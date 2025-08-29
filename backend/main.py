@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 import os
 
 from backend.database import get_db, engine
-import backend.models as models
+from backend import models
 from backend.auth import get_current_user, create_access_token, authenticate_user
 from backend.routes import document_routes
 from backend.websockets.notifications import websocket_endpoint

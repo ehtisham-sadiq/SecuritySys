@@ -3,7 +3,7 @@ from typing import List, Dict, Any
 import datetime
 import math
 
-from backend.models import Employee, Shift, Certification, shift_employee
+from backend.models import Employee, Shift, Certification, Client, Site, shift_employee
 
 class ShiftAssignmentAlgorithm:
     def __init__(self, db: Session):
@@ -79,8 +79,8 @@ class ShiftAssignmentAlgorithm:
                 continue
             
             # Get client and site details
-            client = self.db.query(shift.client).first()
-            site = self.db.query(shift.site).first()
+            client = self.db.query(Client).filter(Client.id == shift.client_id).first()
+            site = self.db.query(Site).filter(Site.id == shift.site_id).first()
             
             if not client or not site:
                 continue
